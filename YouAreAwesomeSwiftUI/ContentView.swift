@@ -18,6 +18,11 @@
 // action: () -> Void //Really represents a block of code
 //() -> Void //Allows
 //Trailing Closure Format is less "clunky""
+// Option Command Left Arrow = Fold current code block
+//Option Command Right Arrow = Unfold the current code block
+//Shift Option Command Left Arrow = Fold all code blocks
+//Shift Option Comand Right Arrow = Unfold all code blocks
+
 
 import SwiftUI
 
@@ -33,19 +38,26 @@ struct ContentView: View {
     var body: some View {
         
         //An HStack in a VStack, groovy...
-        VStack {
-            
+        VStack (spacing: 19) {
             Text(messageArrayContainer) //Takes up the size of the text, hence why padding really shows contents of aPhysically viewed
             //After pressing enter and pressing "." auto indentation
                 .font(.largeTitle) //Just applied a modifier with an input value
                 .fontWeight(.black)
+                .minimumScaleFactor(0.5)
+                .multilineTextAlignment(.center)
                 .padding()
+                .frame(width: 300, height: 150)
+                .border(.blue, width: 1)
                 .background(.red)
             Text("H Town, Peace up!")
                 .font(.largeTitle)
                 .fontWeight(.black)
-            //.padding() //Blank padding is still padding of all around default system value 16
+                .minimumScaleFactor(0.5)
+            // //Blank padding is still padding of all around default system value 16
+                .frame(maxWidth: .infinity)
+                .frame(height: 150)
                 .background(.red)
+                .padding()
             HStack {
                 Button("Click me, (;") {
                     if messageContainer < messageArray.count {
@@ -67,9 +79,9 @@ struct ContentView: View {
                 }
             } //buttonStyle a modifier to the Button Primitive view
             .buttonStyle(.borderedProminent)
-                
-                
-                
+            
+            
+            
             HStack {
                 Image(systemName: "swift") //Modifier order return type validation string?
                     .imageScale(.large)
