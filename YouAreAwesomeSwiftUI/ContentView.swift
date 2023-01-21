@@ -33,6 +33,8 @@ struct ContentView: View {
     //private keeps it within this struct
     @State private var messageArrayContainer = ""
     @State private var messageContainer = 0
+    @State private var messageScreen = ""
+    @State private var imageName = ""
     //body is our parent view that is used to compile the screen!!
     var body: some View {
         
@@ -41,9 +43,9 @@ struct ContentView: View {
             ZStack {
                 Rectangle()
                     .fill(
-    //                    LinearGradient(
-    //                        colors: [.blue, .white], startPoint: .top, endPoint: .bottomTrailing)
-                        RadialGradient(colors: [.red, .black], center: .center, startRadius: 50, endRadius: 100)
+                        //                    LinearGradient(
+                        //                        colors: [.blue, .white], startPoint: .top, endPoint: .bottomTrailing)
+                        //RadialGradient(colors: [.red, .black], center: .center, startRadius: 50, endRadius: 100)
                     )
                     .ignoresSafeArea()
                 //            Color.black.opacity(0.6)
@@ -63,7 +65,14 @@ struct ContentView: View {
                     //                .border(.blue, width: 1)
                     .background(Color("Vermillion"))
                     Spacer()
-                    Text("H Town, Peace up!")
+                    Image(imageName)
+                        .resizable()
+                        .scaledToFit()
+                        .cornerRadius(30)
+                        .shadow(radius: 30)
+                        .padding()
+                    Spacer()
+                    Text("H Town, Peace up! \(messageScreen) \(Date.now.formatted(date: .omitted, time: .shortened))")
                         .font(.largeTitle)
                         .fontWeight(.black)
                         .minimumScaleFactor(0.5)
@@ -97,9 +106,16 @@ struct ContentView: View {
                                 print("\(messageContainer)")
                             }
                         }
+                        Spacer()
+                        Button("Image") {
+                            imageName = (imageName == "image2" ? "image1" : "image2")
+                        }
                         //.padding()
                         Spacer()
                         Button("Not Used (:") {
+                            let message1 = "From the south"
+                            let message2 = "From the east"
+                            messageScreen = (messageScreen == message1 ? message2 : message1)
                             
                         }
                     } }//buttonStyle a modifier to the Button Primitive view
@@ -108,31 +124,154 @@ struct ContentView: View {
                 .tint(.purple)
             }
         }
+        GeometryReader {geometry in
+            ScrollView {
+                
+                LazyVStack {
+                    HStack {
+                        Image(systemName: "swift") //Modifier order return type validation string?
+                            .imageScale(.large)
+                            .foregroundColor(.accentColor) //This modifier only applies to Any Type of View, imageScale returns a view from an Image
+                            .colorInvert()
+                        Image(systemName: "lasso.and.sparkles")
+                            .frame(width: geometry.size.width * (1/8), height: geometry.size.height * (1/8))
+                        //.resizable()
+                            .scaledToFit()
+                        // Moved image away from lower view by 100 up
+                        //Moved image away from trailing by 30
+                            .imageScale(.large) //Has no effect on resizable
+                        //.padding([.bottom, .trailing], 6.0)
+                            .padding(.trailing, 30)
+                        //.background(.black)
+                            .padding(.bottom, 100)
+                            .foregroundColor(.indigo)
+                            .background(.gray)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                                    .stroke(.teal, lineWidth: 1)
+                            )
+                        
+                        //.clipShape(Circle())
+                            .shadow(color: .gray, radius: 60, x: 20, y: 20)
+                            .cornerRadius(30, antialiased: true)
+                        Image(systemName: "wifi", variableValue: 0.66)
+                        Image(systemName: "wifi", variableValue: 0.32)
+                        Image(systemName: "wifi", variableValue: 0.05)
+                        Image(systemName: "wifi", variableValue: 0.66)
+                        Image(systemName: "wifi", variableValue: 0.32)
+                        Image(systemName: "wifi", variableValue: 0.05)
+                    }
+                    //                    .padding()
+                }
+                .padding()
+            }
+            ScrollView {
+                HStack {
+                    VStack {
+                        Image(systemName: "swift") //Modifier order return type validation string?
+                            .imageScale(.large)
+                            .foregroundColor(.accentColor) //This modifier only applies to Any Type of View, imageScale returns a view from an Image
+                            .colorInvert()
+                        Image(systemName: "lasso.and.sparkles")
+                            .frame(width: geometry.size.width * (1/8), height: geometry.size.height * (1/8))
+                        //.resizable()
+                            .scaledToFit()
+                        // Moved image away from lower view by 100 up
+                        //Moved image away from trailing by 30
+                            .imageScale(.large) //Has no effect on resizable
+                        //.padding([.bottom, .trailing], 6.0)
+                            .padding(.trailing, 30)
+                        //.background(.black)
+                            .padding(.bottom, 100)
+                            .foregroundColor(.indigo)
+                            .background(.gray)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                                    .stroke(.teal, lineWidth: 1)
+                            )
+                        
+                        //.clipShape(Circle())
+                            .shadow(color: .gray, radius: 60, x: 20, y: 20)
+                            .cornerRadius(30, antialiased: true)
+                        Image(systemName: "wifi", variableValue: 0.66)
+                        Image(systemName: "wifi", variableValue: 0.32)
+                        Image(systemName: "wifi", variableValue: 0.05)
+                        Image(systemName: "wifi", variableValue: 0.66)
+                        Image(systemName: "wifi", variableValue: 0.32)
+                        Image(systemName: "wifi", variableValue: 0.05)
+                    }
+                    VStack {
+                        Image(systemName: "swift") //Modifier order return type validation string?
+                            .imageScale(.large)
+                            .foregroundColor(.accentColor) //This modifier only applies to Any Type of View, imageScale returns a view from an Image
+                            .colorInvert()
+                        Image(systemName: "lasso.and.sparkles")
+                            .frame(width: geometry.size.width * (1/8), height: geometry.size.height * (1/8))
+                        //.resizable()
+                            .scaledToFit()
+                        // Moved image away from lower view by 100 up
+                        //Moved image away from trailing by 30
+                            .imageScale(.large) //Has no effect on resizable
+                        //.padding([.bottom, .trailing], 6.0)
+                            .padding(.trailing, 30)
+                        //.background(.black)
+                            .padding(.bottom, 100)
+                            .foregroundColor(.indigo)
+                            .background(.gray)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                                    .stroke(.teal, lineWidth: 1)
+                            )
+                        
+                        //.clipShape(Circle())
+                            .shadow(color: .gray, radius: 60, x: 20, y: 20)
+                            .cornerRadius(30, antialiased: true)
+                        Image(systemName: "wifi", variableValue: 0.66)
+                        Image(systemName: "wifi", variableValue: 0.32)
+                        Image(systemName: "wifi", variableValue: 0.05)
+                        Image(systemName: "wifi", variableValue: 0.66)
+                        Image(systemName: "wifi", variableValue: 0.32)
+                        Image(systemName: "wifi", variableValue: 0.05)
+                    }
+                    VStack {
+                        Image(systemName: "swift") //Modifier order return type validation string?
+                            .imageScale(.large)
+                            .foregroundColor(.accentColor) //This modifier only applies to Any Type of View, imageScale returns a view from an Image
+                            .colorInvert()
+                        Image(systemName: "lasso.and.sparkles")
+                            .frame(width: geometry.size.width * (1/8), height: geometry.size.height * (1/8))
+                        //.resizable()
+                            .scaledToFit()
+                        // Moved image away from lower view by 100 up
+                        //Moved image away from trailing by 30
+                            .imageScale(.large) //Has no effect on resizable
+                        //.padding([.bottom, .trailing], 6.0)
+                            .padding(.trailing, 30)
+                        //.background(.black)
+                            .padding(.bottom, 100)
+                            .foregroundColor(.indigo)
+                            .background(.gray)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                                    .stroke(.teal, lineWidth: 1)
+                            )
+                        
+                        //.clipShape(Circle())
+                            .shadow(color: .gray, radius: 60, x: 20, y: 20)
+                            .cornerRadius(30, antialiased: true)
+                        Image(systemName: "wifi", variableValue: 0.66)
+                        Image(systemName: "wifi", variableValue: 0.32)
+                        Image(systemName: "wifi", variableValue: 0.05)
+                        Image(systemName: "wifi", variableValue: 0.66)
+                        Image(systemName: "wifi", variableValue: 0.32)
+                        Image(systemName: "wifi", variableValue: 0.05)
+                    }
+                }
+            }
+            .position(x: geometry.size.width/2, y: geometry.size.height)
+            // .padding()
+        }
     }
-    // VStack {
-    
-    
-    
-    //            HStack {
-    //                Image(systemName: "swift") //Modifier order return type validation string?
-    //                    .imageScale(.large)
-    //                    .foregroundColor(.accentColor) //This modifier only applies to Any Type of View, imageScale returns a view from an Image
-    //                    .colorInvert()
-    //                Image(systemName: "lasso.and.sparkles")
-    //                    .resizable()
-    //                    .scaledToFit()
-    //                // Moved image away from lower view by 100 up
-    //                //Moved image away from trailing by 30
-    //                    .imageScale(.large) //Has no effect on resizable
-    //                //.padding([.bottom, .trailing], 6.0)
-    //                    .padding(.trailing, 30)
-    //                //.background(.black)
-    //                    .padding(.bottom, 100)
-    //                    .foregroundColor(.indigo)
-    //            }
-    //
-    //        .padding()
-    //}
 }
 
 struct ContentView_Previews: PreviewProvider {
