@@ -23,7 +23,6 @@
 //Shift Option Command Left Arrow = Fold all code blocks
 //Shift Option Comand Right Arrow = Unfold all code blocks
 
-
 import SwiftUI
 
 struct ContentView: View {
@@ -38,71 +37,102 @@ struct ContentView: View {
     var body: some View {
         
         //An HStack in a VStack, groovy...
-        VStack (spacing: 19) {
-            Text(messageArrayContainer) //Takes up the size of the text, hence why padding really shows contents of aPhysically viewed
-            //After pressing enter and pressing "." auto indentation
-                .font(.largeTitle) //Just applied a modifier with an input value
-                .fontWeight(.black)
-                .minimumScaleFactor(0.5)
-                .multilineTextAlignment(.center)
-                .padding()
-                .frame(width: 300, height: 150)
-                .border(.blue, width: 1)
-                .background(.red)
-            Text("H Town, Peace up!")
-                .font(.largeTitle)
-                .fontWeight(.black)
-                .minimumScaleFactor(0.5)
-            // //Blank padding is still padding of all around default system value 16
-                .frame(maxWidth: .infinity)
-                .frame(height: 150)
-                .background(.red)
-                .padding()
-            HStack {
-                Button("Click me, (;") {
-                    if messageContainer < messageArray.count {
-                        
-                        messageArrayContainer = messageArray[messageContainer]
-                        messageContainer = messageContainer + 1
-                        print("\(messageContainer)")
+        GeometryReader {geometry in
+            ZStack {
+                Rectangle()
+                    .fill(
+    //                    LinearGradient(
+    //                        colors: [.blue, .white], startPoint: .top, endPoint: .bottomTrailing)
+                        RadialGradient(colors: [.red, .black], center: .center, startRadius: 50, endRadius: 100)
+                    )
+                    .ignoresSafeArea()
+                //            Color.black.opacity(0.6)
+                //                .ignoresSafeArea()
+                VStack (spacing: 19) {
+                    Spacer()
+                    Group {
+                        Text(messageArrayContainer) //Takes up the size of the text, hence why padding really shows contents of aPhysically viewed
+                        //After pressing enter and pressing "." auto indentation
                     }
-                    else {
-                        messageContainer = 0
-                        messageArrayContainer = messageArray[messageContainer]
-                        messageContainer = messageContainer + 1
-                        print("\(messageContainer)")
-                    }
-                }
-                
-                Button("Not Used (:") {
-                    
-                }
-            } //buttonStyle a modifier to the Button Primitive view
-            .buttonStyle(.borderedProminent)
-            
-            
-            
-            HStack {
-                Image(systemName: "swift") //Modifier order return type validation string?
-                    .imageScale(.large)
-                    .foregroundColor(.accentColor) //This modifier only applies to Any Type of View, imageScale returns a view from an Image
-                    .colorInvert()
-                Image(systemName: "lasso.and.sparkles")
-                    .resizable()
-                    .scaledToFit()
-                // Moved image away from lower view by 100 up
-                //Moved image away from trailing by 30
-                    .imageScale(.large) //Has no effect on resizable
-                //.padding([.bottom, .trailing], 6.0)
-                    .padding(.trailing, 30)
-                //.background(.black)
-                    .padding(.bottom, 100)
-                    .foregroundColor(.indigo)
+                    .font(.largeTitle) //Just applied a modifier with an input value
+                    .fontWeight(.ultraLight)
+                    .minimumScaleFactor(0.5)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                    .frame(width: 300, height: 150)
+                    //                .border(.blue, width: 1)
+                    .background(Color("Vermillion"))
+                    Spacer()
+                    Text("H Town, Peace up!")
+                        .font(.largeTitle)
+                        .fontWeight(.black)
+                        .minimumScaleFactor(0.5)
+                    // //Blank padding is still padding of all around default system value 16
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 150)
+                    //.background(.red)
+                        .background(Color("CompanyTeal"))
+                        .padding()
+                        .cornerRadius(19)
+                    Spacer()
+                    Divider()
+                        .background(.red)
+                        .padding()
+                        .frame(width: 300.0)
+                    Rectangle()
+                        .fill(.orange)
+                        .frame(width: geometry.size.width * (2/3), height: 10)
+                    HStack {
+                        Button("Click me, (;") {
+                            if messageContainer < messageArray.count {
+                                
+                                messageArrayContainer = messageArray[messageContainer]
+                                messageContainer = messageContainer + 1
+                                print("\(messageContainer)")
+                            }
+                            else {
+                                messageContainer = 0
+                                messageArrayContainer = messageArray[messageContainer]
+                                messageContainer = messageContainer + 1
+                                print("\(messageContainer)")
+                            }
+                        }
+                        //.padding()
+                        Spacer()
+                        Button("Not Used (:") {
+                            
+                        }
+                    } }//buttonStyle a modifier to the Button Primitive view
+                .buttonStyle(.borderedProminent)
+                .padding()
+                .tint(.purple)
             }
-            
         }
-        .padding()
     }
+    // VStack {
+    
+    
+    
+    //            HStack {
+    //                Image(systemName: "swift") //Modifier order return type validation string?
+    //                    .imageScale(.large)
+    //                    .foregroundColor(.accentColor) //This modifier only applies to Any Type of View, imageScale returns a view from an Image
+    //                    .colorInvert()
+    //                Image(systemName: "lasso.and.sparkles")
+    //                    .resizable()
+    //                    .scaledToFit()
+    //                // Moved image away from lower view by 100 up
+    //                //Moved image away from trailing by 30
+    //                    .imageScale(.large) //Has no effect on resizable
+    //                //.padding([.bottom, .trailing], 6.0)
+    //                    .padding(.trailing, 30)
+    //                //.background(.black)
+    //                    .padding(.bottom, 100)
+    //                    .foregroundColor(.indigo)
+    //            }
+    //
+    //        .padding()
+    //}
 }
 
 struct ContentView_Previews: PreviewProvider {
